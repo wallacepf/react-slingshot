@@ -19,6 +19,7 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - checkout
       - restore_cache:
           keys:
             - v1-deps-{{ checksum "package-lock.json" }}
@@ -27,6 +28,7 @@ jobs:
   analyse:
     <<: *defaults
     steps:
+      - checkout
       - run: npm audit
 
 workflows:
