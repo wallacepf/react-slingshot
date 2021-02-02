@@ -12,8 +12,8 @@ jobs:
       - run: npm i
       - save_cache:
           paths:
-            - /src/node_modules
-          key: "npm-packages"
+            - node_modules
+          key: v1-deps-{{ checksum "package-lock.json" }}
       - run: npm run lint
   
   test:
@@ -21,7 +21,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - "npm-packages"
+            - v1-deps-{{ checksum "package-lock.json" }}
       - run: npm run test
       
   analyse:
